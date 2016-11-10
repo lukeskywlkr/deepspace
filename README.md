@@ -1,3 +1,3 @@
 # Deepspace
 
-Deepspace is a Node.js app for stock data into cloud storages. Using Hapi, Bluebird, pkgcloud.
+Deepspace is a Node.js app to stock data into cloud storages. Using Hapi, Bluebird, pkgcloud.
