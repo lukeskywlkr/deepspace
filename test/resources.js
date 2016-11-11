@@ -22,6 +22,19 @@ test('endpoint test | POST /resources | empty request => 400 Bad Request', t => 
   .then(response => {
     t.is(response.statusCode, 400, 'status code is 400');
   });
+});
+
+test('endpoint test | POST /resources | empty request => 400 Bad Request', t => {
+  const request = Object.assign({}, {
+    method: 'POST',
+    url: '/resources',
+    payload: {}
+  });
+  return server.inject(request)
+  .then(response => {
+    t.is(response.statusCode, 400, 'status code is 400');
+  });
+});
 
 test('endpoint test | GET /resources/{resourceUUID} | wrong uuid format => 400 Bad Request', t => {
   const request = Object.assign({}, {
