@@ -1,7 +1,6 @@
 'use strict'
-
 const Hapi = require('hapi');
-
+const logger = require('./logger.js');
 const server = new Hapi.Server();
 const routes = require('./routes');
 
@@ -17,6 +16,7 @@ server.start((err) => {
   if (err) {
     throw err;
   }
-
-  console.log('Server running at: ', server.info.uri);
+  logger.info('Server running at: ' + server.info.uri, {timestamp: new Date().toJSON(), pid: process.pid});
 });
+
+module.exports.server = server;
