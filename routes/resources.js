@@ -1,4 +1,6 @@
 const logic = require('../logic/resources.js');
+const Boom = require('boom');
+const _ = require('lodash');
 module.exports = [
     {
         method: 'POST',
@@ -10,7 +12,10 @@ module.exports = [
             parse: true
           },
           handler: function(request, reply) {
-            return logic.upload(request, reply);
+            if(!_.has(request.headers, 'content-length')) {
+              return reply(Boom.badRequest('No payload'));
+            } else
+              return logic.upload(request, reply);
           }
         }
     }, {
@@ -19,5 +24,12 @@ module.exports = [
         handler: function(request, reply) {
             return logic.greetings(request, reply);
         }
-    }
+    },
+    {
+       method: 'GET',
+       path: '/resources/{resUUID}',
+       handler: function(request, reply) {
+           return logic.get(request, reply);
+       }
+   }
 ];
